@@ -38,11 +38,11 @@ services:
         # ════════════════════════════════════════════════════════════
         # Pick an unused IP on your LAN (outside DHCP range).
         # Example: 192.168.1.53 (matching DNS port)
-        ipv4_address: 192.168.1.53
+        ipv4_address: 172.16.3.21
     environment:
       TZ: ${TZ:-UTC}
       FTLCONF_webserver_api_password: ${PIHOLE_PASSWORD:-}
-      FTLCONF_dns_upstreams: "1.1.1.1;1.0.0.1" # Cloudflare (change if preferred); use semicolon for multiple
+      FTLCONF_dns_upstreams: "9.9.9.9;149.112.112.112" # Cloudflare (change if preferred); use semicolon for multiple
       FTLCONF_dns_listeningMode: all
       FTLCONF_misc_etc_dnsmasq_d: "true" # Pi-hole v6: Enable /etc/dnsmasq.d/ config files (disabled by default)
       DNSMASQ_USER: root # Required on Synology — see pihole/docker-pi-hole#963
@@ -53,7 +53,7 @@ services:
       - NET_ADMIN
     dns:
       - 127.0.0.1 # Pi-hole uses itself for DNS
-      - 1.1.1.1 # Fallback during container startup
+      - 9.9.9.9 # Fallback during container startup
 
 networks:
   pihole_net:
@@ -64,14 +64,14 @@ networks:
       # ════════════════════════════════════════════════════════════
       # Check with: ssh your-nas "ip addr"
       # Common values: eth0, eth1, bond0
-      parent: eth0
+      parent: eth4
     ipam:
       config:
         # ════════════════════════════════════════════════════════════
         # CONFIGURATION: Set your LAN network details here
         # ════════════════════════════════════════════════════════════
-        - subnet: 192.168.1.0/24 # Your LAN subnet
-          gateway: 192.168.1.1 # Your router/gateway IP
+        - subnet: 172.16.2.0/21 # Your LAN subnet
+          gateway: 172.16.2.10 # Your router/gateway IP
           ip_range:
-            192.168.1.53/32 # Pi-hole's IP (must match ipv4_address above)
+            172.16.3.21/32 # Pi-hole's IP (must match ipv4_address above)
             # /32 restricts Docker to exactly this one IP

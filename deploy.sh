@@ -22,11 +22,11 @@ set -euo pipefail
 # ═════════════════════════════════════════════════════════════════════
 # CONFIGURATION — Edit these to match your setup
 # ═════════════════════════════════════════════════════════════════════
-NAS_USER="your-username"         # Your SSH username on the Synology
-NAS_IP="192.168.1.2"             # Your Synology's IP address
+NAS_USER="martin"         # Your SSH username on the Synology
+NAS_IP="172.16.3.42"             # Your Synology's IP address
 NAS_HOST="${NAS_USER}@${NAS_IP}"
 NAS_DIR="/volume1/docker/pihole" # Deployment directory on NAS
-PIHOLE_IP="192.168.1.53"         # Pi-hole's IP (must match docker-compose.yml)
+PIHOLE_IP="172.16.2.21"         # Pi-hole's IP (must match docker-compose.yml)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # ═════════════════════════════════════════════════════════════════════
 
